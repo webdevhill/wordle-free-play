@@ -1,0 +1,290 @@
+:root{
+    /* Base Colors */
+    --color-neutral-000: hsl(0, 0%, 100%); /* Official Wordle White is #fff */
+    --color-neutral-100: hsl(226, 70%, 88%); /* Lightest Slate  - portfolio color*/
+    --color-neutral-200: hsl(204, 7%, 85%); /* Official Wordle Alert Grey */
+    --color-neutral-400: hsl(200, 1%, 51%); /* Official Wordle Grey */
+    --color-neutral-500: hsl(200, 1%, 34%); /* Active Game Tile Border */
+    --color-neutral-600: hsl(240, 2%, 23%); /* Official Wordle Incorrect/Tile Border- dark shade-blue-magenta */
+    --color-neutral-800: hsl(216, 65%, 11%); /* Darkest Navy - portfolio bg */
+    --color-neutral-900: hsl(240, 3%, 7%); /* Official Wordle Black*/
+
+    /* Highlight Colors */
+    --color-highlight-yellow: hsl(49, 51%, 47%); /* Official Wordle Yellow */
+    --color-highlight-green: hsl(115, 29%, 43%); /* Official Wordle Green */
+
+    /* Variable Button Colors --base Wordle grey*/
+    --color-variable-400: hsl(
+        var(--hue, 200),
+        var( --saturation, 1%),
+        var(--lightness, 51%)); 
+
+}
+
+*, *::after, *::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    background-color: var(--color-neutral-900);
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    min-height: 100vh;
+    padding: 1em;
+    font-size: clamp(0.5rem, 2.5vmin, 1.5rem);
+    text-transform: uppercase;
+}
+
+header {
+    font-size: 2.5em;
+    color: var(--color-neutral-000);
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+h1{
+   letter-spacing: 0.2em;
+}
+
+.keyboard {
+    display: grid;
+    grid-template-columns: repeat(20, minmax(auto, 2.25em));
+    grid-auto-rows: 6em;
+    gap: 0.5em;
+    justify-content: center;
+}
+
+.key {
+    font-size: inherit;
+    grid-column: span 2;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color:  hsl(
+        var(--hue, 200),
+        var( --saturation, 1%),
+        calc(var(--lightness-offset, 0%) + var(--lightness, 51%))
+        ); 
+    color: var(--color-neutral-000);
+    fill: var(--color-neutral-000);
+    border-radius: 0.25em;
+    cursor: pointer;
+    user-select: none;
+}
+
+.wide-button {
+    grid-column: span 3;
+}
+
+.key > svg {
+    width: 1.75em;
+    height: 1.75em;
+}
+
+.key:hover, .key:focus {
+    --lightness-offset: 10%;
+}
+
+.incorrect {
+    --lightness: 21%;
+}
+
+.incorrect-location {
+    --hue: 49;
+    --saturation: 51%;
+    --lightness: 47%
+
+}
+
+.correct {
+    --hue: 115;
+    --saturation: 29%;
+    --lightness: 43%
+}
+
+.game-grid {
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    /* flex-grow: 1; */
+    grid-template-columns: repeat(5, 7em);
+    grid-template-rows: repeat(6, 7em);
+    gap: 0.5em;
+    margin-bottom: 1em;
+}
+
+.tile {
+    font-size: 2em;
+    color: var(--color-neutral-000);
+    border: 0.05em solid var(--color-neutral-600);
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+    transition: transform 250ms linear;
+}
+
+.tile[data-state="active"] {
+    border-color: var(--color-neutral-500);
+}
+
+.tile[data-state="incorrect"] {
+    border: none;
+    background-color: var(--color-neutral-600);
+}
+
+.tile[data-state="incorrect-location"] {
+    border: none;
+    background-color: var(--color-highlight-yellow);
+}
+
+.tile[data-state="correct"] {
+    border: none;
+    background-color: var(--color-highlight-green);
+}
+
+.alert-container {
+    position: fixed;
+    top: 10vh;
+    left: 50vw;
+    transform: translateX(-50%);
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.alert {
+    pointer-events: none;
+    background-color: var(--color-neutral-200);
+    padding: 0.75em;
+    border-radius: 0.25em;
+    opacity: 1;
+    transition: opacity 500ms ease-in-out;
+    margin-bottom: 0.5em;
+}
+
+.alert:last-child {
+    margin-bottom: 0;
+} 
+
+.alert.hide {
+    opacity: 0;
+}
+
+.shake {
+    animation: shake 250ms ease-in-out
+}
+
+.tile.dance {
+    animation: dance 250ms ease-in-out
+}
+
+.flip {
+    transform: rotateX(90deg);
+}
+
+@keyframes shake {
+    10% {
+        transform: translateX(-5%);
+    }
+    
+    30% {
+        transform: translateX(5%);
+    }
+
+    50% {
+        transform: translateX(-7.5%);
+    }
+
+    70% {
+        transform: translateX(7.5%);
+    }
+
+    90% {
+        transform: translateX(-5%);
+    }
+
+    100% {
+       transform: translateX(0);
+    }
+}
+
+@keyframes dance {
+    20% {
+        transform: translatey(-50%);
+    }
+    
+    40% {
+        transform: translatey(5%);
+    }
+
+    60% {
+        transform: translatey(-25%);
+    }
+
+    80% {
+        transform: translatey(.5%);
+    }
+
+    90% {
+        transform: translatey(-5%);
+    }
+
+    100% {
+       transform: translatey(0);
+    }
+}
+
+@media (min-width: 480px) {
+    header {
+        font-size: 1em;
+        color: var(--color-neutral-000);
+        text-align: center;
+        /* display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 1em auto; */
+    }
+
+    .game-grid {
+        display: grid;
+        justify-content: center;
+        align-content: center;
+        flex-grow: 1;
+        grid-template-columns: repeat(5, 3.5em);
+        grid-template-rows: repeat(6, 3.5em);
+        gap: 0.5em;
+        margin-bottom: 1em;
+    }
+
+    .keyboard {
+        display: grid;
+        grid-template-columns: repeat(20, minmax(auto, 1.25em));
+        grid-auto-rows: 3em;
+        gap: 0.25em;
+        justify-content: center;
+        margin-bottom: 0.5em;
+    }
+
+    .tile {
+        font-size: 2em;
+        color: var(--color-neutral-000);
+        border: 0.05em solid var(--color-neutral-600);
+        font-weight: bold;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        user-select: none;
+        transition: transform 250ms linear;
+    }
+    
+}
