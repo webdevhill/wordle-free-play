@@ -15297,7 +15297,7 @@ const keyboard = document.querySelector("[data-keyboard]");
 const alertContainer = document.querySelector("[data-alert-container]");
 const gameGrid = document.querySelector("[data-game-grid]");
 // Generate daily word based on date and Wodle List
-const offsetFromDate = new Date(2023, 7, 31);
+const offsetFromDate = new Date(2022, 0, 1);
 const msOffset = Date.now() - offsetFromDate;
 const dayOffset = msOffset / 1000 / 60 / 60 / 24;
 const targetWord0 = dailyWords[Math.floor(dayOffset)];
@@ -15419,11 +15419,11 @@ function flipTile(tile, index, array, answer) {
         tile.dataset.state = "correct";
         key.classList.add("correct");
       } else if (targetWord1.includes(letter)) {
-        tile.dataset.state = "wrong-location";
-        key.classList.add("wrong-location");
+        tile.dataset.state = "incorrect-location";
+        key.classList.add("incorrect-location");
       } else {
-        tile.dataset.state = "wrong";
-        key.classList.add("wrong");
+        tile.dataset.state = "incorrect";
+        key.classList.add("incorrect");
       }
 
       if (index === array.length - 1) {

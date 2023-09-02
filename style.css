@@ -249,10 +249,10 @@ h1{
         font-size: 1em;
         color: var(--color-neutral-000);
         text-align: center;
-        /* display: flex;
+         display: flex;
         justify-content: center;
         align-items: center;
-        margin: 1em auto; */
+        margin: 1em auto;
     }
 
     .game-grid {
@@ -287,4 +287,4 @@ h1{
         transition: transform 250ms linear;
     }
     
-}
+} 
