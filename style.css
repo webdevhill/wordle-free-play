@@ -21,6 +21,14 @@
 
 }
 
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' -25,
+  'opsz' 40,
+}
+
 *, *::after, *::before {
     margin: 0;
     padding: 0;
@@ -44,12 +52,25 @@ header {
     color: var(--color-neutral-000);
     text-align: center;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
 }
 
 h1{
    letter-spacing: 0.2em;
+   margin-right: 1em;
+}
+
+span {
+    background-color: var(--color-highlight-green);
+    padding: 0.5em;
+    border: none;
+    color: var(--color-neutral-000);
+    text-shadow: 0 0 3.5rem var(--color-neutral-000),
+}
+
+span:hover {
+    transform: scale(1.1);
 }
 
 .keyboard {
@@ -249,12 +270,17 @@ h1{
         font-size: 1em;
         color: var(--color-neutral-000);
         text-align: center;
-         display: flex;
+        display: flex;
         justify-content: center;
-        align-items: center;
+        align-items: center; 
+        width: 100vw;
         margin: 1em auto;
     }
 
+    .reload {
+        align-items: flex-end;
+    }
+    
     .game-grid {
         display: grid;
         justify-content: center;

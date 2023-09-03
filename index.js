@@ -15318,6 +15318,11 @@ console.log(targetWord1);
 let targetWord2 = allowedWords[Math.floor(Math.random() * allowedWords.length)];
 console.log(targetWord2);
 
+const button = document.querySelector("[data-button]");
+button.addEventListener("click", () => {
+  window.location.reload();
+});
+
 startGame();
 
 function startGame() {
